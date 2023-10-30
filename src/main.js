@@ -1,27 +1,25 @@
-const taskForm = document.getElementById("task-form");
-const taskList = document.getElementById("task-list");
+const input = document.querySelector('input');
+const addBtn = document.querySelector('.btn-add');
+const ul = document.querySelector("ul");
+const empty = document.querySelector('.empty');
 
-taskForm.addEventListener("submit", function (e) {
+
+addBtn.addEventListener("click", (e) =>{
     e.preventDefault();
+    
+    const text= input.value;
+if (text !== ''){
+    const li = document.createElement('li');
+    const p = document.createElement('p');
+    p.textContent = text;
 
-    const taskTitle = document.getElementById("task-title").value;
-    const taskDescription = document.getElementById("task-description").value;
+    li.appendChild(p);
+    li.appendChild(addDeleteBtn());
+    ul.appendChild(li);
 
-    if (taskTitle.trim() === "") {
-        alert("El título de la tarea no puede estar vacío.");
-        return;
-    }
-
-    const taskItem = document.createElement("li");
-    taskItem.innerHTML = `
-        <h3>${taskTitle}</h3>
-        <p>${taskDescription}</p>
-        <button class="complete-button">Completar</button>
-        <button class="delete-button">Eliminar</button>
-    `;
-
-    taskList.appendChild(taskItem);
-
-    // Limpiar el formulario
-    taskForm.reset();
-});
+    input.value = "";
+    empty.Style.display = "none";
+}
+    
+}
+);
