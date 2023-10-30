@@ -13,6 +13,11 @@ addBtn.addEventListener("click", (e) => {
         const p = document.createElement('p');
         p.textContent = text;
 
+        // Agregar la hora actual
+        const currentTime = new Date();
+        const timeText = `(${currentTime.getHours()}:${currentTime.getMinutes()}:${currentTime.getSeconds()})`;
+        p.textContent += ' ' + timeText;
+
         li.appendChild(p);
         li.appendChild(addDeleteBtn());
         taskList.appendChild(li);
@@ -25,7 +30,7 @@ addBtn.addEventListener("click", (e) => {
 function addDeleteBtn() {
     const deleteBtn = document.createElement('button');
     deleteBtn.textContent = "X";
-    deleteBtn.className = "btn-delete";
+    deleteBtn.className = "btn-delete rounded-full bg-red-500 hover:bg-red-600 text-white px-2 py-1 ";
 
     deleteBtn.addEventListener('click', (e) => {
         const item = e.target.parentElement;
