@@ -1,37 +1,41 @@
-const input = document.querySelector('input');
-const addBtn = document.querySelector('.btn-add');
-const ul = document.querySelector("ul");
-const empty = document.querySelector('.empty');
+// main.js
+const addBtn = document.getElementById('addTask');
+const taskList = document.getElementById('taskList');
+const empty = document.getElementById('empty');
 
-
-addBtn.addEventListener("click", (e) =>{
+addBtn.addEventListener("click", (e) => {
     e.preventDefault();
     
-    const text= input.value;
-if (text !== ''){
-    const li = document.createElement('li');
-    const p = document.createElement('p');
-    p.textContent = text;
+    const input = document.querySelector('input');
+    const text = input.value;
+    if (text !== '') {
+        const li = document.createElement('li');
+        const p = document.createElement('p');
+        p.textContent = text;
 
-    li.appendChild(p);
-    li.appendChild(addDeleteBtn());
-    ul.appendChild(li);
+        li.appendChild(p);
+        li.appendChild(addDeleteBtn());
+        taskList.appendChild(li);
 
-    input.value = "";
-    empty.Style.display = "none";
-}
-    
-}
-);
+        input.value = '';
+        empty.style.display = 'none';
+    }
+});
+
 function addDeleteBtn() {
-    const deleteBtn = document.createElement ('button');
-    deleteBtn.textContent = "X"
-    deleteBtn.className ="btn-delete"
+    const deleteBtn = document.createElement('button');
+    deleteBtn.textContent = "X";
+    deleteBtn.className = "btn-delete";
 
     deleteBtn.addEventListener('click', (e) => {
         const item = e.target.parentElement;
-        ul.removeChild(item);
+        taskList.removeChild(item);
 
-    })
-    return deleteBtn
+        const items = document.querySelectorAll('li');
+
+        if (items.length === 0) {
+            empty.style.display = 'block';
+        }
+    });
+    return deleteBtn;
 }
